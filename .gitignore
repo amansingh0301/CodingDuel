@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 /node_modules
 /src/.env
+=======
+loginLogout/
+node_modules/
+submitSolution/
+problems/
+>>>>>>> 1v1/combining-api
