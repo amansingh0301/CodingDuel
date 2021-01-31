@@ -1,8 +1,9 @@
 const puppeteer = require("puppeteer");
-const credentials = require("../credentials.json");
+// const credentials = require("../credentials.json");
+require("dotenv").config();
 const fs = require("fs");
-var handle = credentials.handle;
-var password = credentials.password;
+var handle = process.env.handle;
+var password = process.env.password;
 const verdict = require("./verdict");
 
 // handle the situation when the code entered is the same as some old submission,
