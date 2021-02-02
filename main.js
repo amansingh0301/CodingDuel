@@ -24,7 +24,7 @@ var app = express();
 mongoose
   .connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) =>
-    server.listen(port, () => console.log("Server running on 4000"))
+    server.listen(port, () => console.log(`Server running on ${port}`))
   )
   .catch((err) => console.log(err));
 
@@ -41,12 +41,12 @@ app.use((req, res, next) => {
 //     res.sendFile(path.join(__dirname,'client','public','index.html'));
 //   })
 
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static(path.join(__dirname,'client/build')))
-  app.get('*',(req,res)=>{
-    res.sendFile('index.html');
-  })
-}
+// if(process.env.NODE_ENV === 'production'){
+//   app.use(express.static(path.join(__dirname,'client/build')))
+//   app.get('*',(req,res)=>{
+//     res.sendFile('index.html');
+//   })
+// }
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.raw());
