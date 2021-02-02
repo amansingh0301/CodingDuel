@@ -43,12 +43,12 @@ app.use((req, res, next) => {
 
 if (process.env.NODE_ENV === 'production') {
   // Exprees will serve up production assets
-  app.use(express.static(__dirname,'build'));
+  app.use(express.static('client','build'));
 
   // Express serve up index.html file if it doesn't recognize route
   // const path = require('path');
   app.get('*', (req, res) => {
-    res.sendFile(__dirname,'build','index.html');
+    res.sendFile('client','build','index.html');
   });
 }
 
