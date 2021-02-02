@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
+  "engines": {
+    "node":"v12.19.0"
+  },
   "scripts": {
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build --max_old_space_size=8192",
     "test": "echo \"Error: no test specified\" && exit 1",
