@@ -41,12 +41,12 @@ app.use((req, res, next) => {
 //     res.sendFile(path.join(__dirname,'client','public','index.html'));
 //   })
 
-// if(process.env.NODE_ENV === 'production'){
-//   app.use(express.static(path.join(__dirname,'client/build')))
-//   app.get('*',(req,res)=>{
-//     res.sendFile('index.html');
-//   })
-// }
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static(path.join(__dirname,'client/build')))
+  app.get('*',(req,res)=>{
+    res.sendFile('index.html');
+  })
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.raw());
