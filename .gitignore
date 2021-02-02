@@ -1,3 +1,5 @@
 /node_modules
 /.env
 /credentials.json
+/*/node_modules
+/*/build
