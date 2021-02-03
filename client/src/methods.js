@@ -60,6 +60,7 @@ function handleSignallingData(data) {
             .setRemoteDescription(data.answer)
             .then(() => {console.log('remote description set')})
             .catch((err) => {
+              console.log('remote description is not set')
               console.log(err)
               alert("refresh and try again.");
             });
@@ -79,6 +80,7 @@ function handleSignallingData(data) {
             createAndSendAnswerj();
           })
           .catch((err) => {
+            console.log('remote description not set')
             console.log(err)
             alert("refresh page and try again.");
           });
@@ -202,11 +204,11 @@ function goToVideoCall(callback, roomName) {
               localStream.getAudioTracks()[0].stop();
             }
             console.log(peerConn.connectionState);
-            // if (peerConn) {
-            //   peerConn.close();
-            // } else if (peerConnj) {
-            //   peerConnj.close();
-            // }
+            if (peerConn) {
+              peerConn.close();
+            } else if (peerConnj) {
+              peerConnj.close();
+            }
             const remoteVideo = document.querySelector("video");
             remoteVideo.pause();
             remoteVideo.srcObject = null;
@@ -426,11 +428,11 @@ function joinVideoCall(callback, roomName) {
               localStream.getAudioTracks()[0].stop();
             }
             console.log(peerConnj.connectionState)
-            // if (peerConn) {
-            //   peerConn.close();
-            // } else if (peerConnj) {
-            //   peerConnj.close();
-            // }
+            if (peerConn) {
+              peerConn.close();
+            } else if (peerConnj) {
+              peerConnj.close();
+            }
             const remoteVideo = document.querySelector("video");
             remoteVideo.pause();
             remoteVideo.srcObject = null;
@@ -557,6 +559,7 @@ function createAndSendAnswerj() {
         console.log('local description not set')
         console.log(err);
       });
+      console.log('sending answer..')
       sendDataj({
         type: "send_answer",
         answer: answer,
