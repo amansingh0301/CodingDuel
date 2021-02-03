@@ -5,11 +5,11 @@ const http = require("http");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const User = require("./user-schema");
+const User = require("./serverUtils/user-schema");
 const cors = require("cors");
-const randomProblem = require("./fetch-problem/random_problem").randomProblem;
-const compile = require("./compilerAPI/main.js");
-const submitToCf = require("./cf-interact/login");
+const randomProblem = require("./serverUtils/fetch-problem/random_problem").randomProblem;
+const compile = require("./serverUtils/compilerAPI/main.js");
+const submitToCf = require("./serverUtils/cf-interact/login");
 require("dotenv").config();
 const dbUri = process.env.MONGO_ATLAS_URI;
 // const publicPath = path.join(__dirname +".."+ "public");
@@ -43,12 +43,12 @@ app.use((req, res, next) => {
 
 if (process.env.NODE_ENV === 'production') {
   // Exprees will serve up production assets
-  app.use(express.static(__dirname,'build'));
+  app.use(express.static(path.join(__dirname,'client/build')));
 
   // Express serve up index.html file if it doesn't recognize route
   // const path = require('path');
   app.get('*', (req, res) => {
-    res.sendFile(__dirname,'build','index.html');
+    res.sendFile(path.join(__dirname,'client/build','index.html'));
   });
 }
 
