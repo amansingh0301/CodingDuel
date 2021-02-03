@@ -88,6 +88,7 @@ function handleSignallingData(data) {
         try{
           if (data.from == "receiver") {
             peerConn.addIceCandidate(data.candidate)
+            .then(()=>{console.log('ice candidate added')})
             .catch(err => {
               console.log('while adding ice candidate')
               console.log(err)
@@ -98,10 +99,12 @@ function handleSignallingData(data) {
               alert("someone try to join, refresh page and try again.")
               er=true;
             })
-            console.log('ice candidate added')
           }
           else {
             peerConnj.addIceCandidate(data.candidate)
+            .then(()=>{
+              console.log('ice candidate added')
+            })
             .catch(err => {
               console.log('while adding ice candidate')
               console.log(err)
@@ -112,7 +115,6 @@ function handleSignallingData(data) {
               alert("someone try to join, refresh page and try again.")
               er=true;
             })
-            console.log('ice candidate added')
           };
         }catch(err){
           console.log(err)
@@ -200,11 +202,11 @@ function goToVideoCall(callback, roomName) {
               localStream.getAudioTracks()[0].stop();
             }
             console.log(peerConn.connectionState);
-            if (peerConn) {
-              peerConn.close();
-            } else if (peerConnj) {
-              peerConnj.close();
-            }
+            // if (peerConn) {
+            //   peerConn.close();
+            // } else if (peerConnj) {
+            //   peerConnj.close();
+            // }
             const remoteVideo = document.querySelector("video");
             remoteVideo.pause();
             remoteVideo.srcObject = null;
@@ -417,11 +419,11 @@ function joinVideoCall(callback, roomName) {
               localStream.getAudioTracks()[0].stop();
             }
             console.log(peerConnj.connectionState)
-            if (peerConn) {
-              peerConn.close();
-            } else if (peerConnj) {
-              peerConnj.close();
-            }
+            // if (peerConn) {
+            //   peerConn.close();
+            // } else if (peerConnj) {
+            //   peerConnj.close();
+            // }
             const remoteVideo = document.querySelector("video");
             remoteVideo.pause();
             remoteVideo.srcObject = null;
