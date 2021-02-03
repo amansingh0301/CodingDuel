@@ -14,7 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ProblemFilters from "./ProblemFilters";
 // var HOST = window.location.origin.replace(/^http/, 'ws')
 // console.log(HOST)
-var url="ws://codingduel.herokuapp.com";
+var url="wss://codingduel.herokuapp.com";
 // var url="ws://localhost:4000";
 var connection;
 var problems;

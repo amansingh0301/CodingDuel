@@ -1,5 +1,5 @@
 // var HOST = window.location.origin.replace(/^http/, 'ws')
-var url="ws://codingduel.herokuapp.com";
+var url="wss://codingduel.herokuapp.com";
 // var url="ws://localhost:4000";
 var webSocket = new WebSocket(url);
 var opponent = false;

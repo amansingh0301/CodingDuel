@@ -12,7 +12,7 @@ import methods from "../methods";
 
 const MathJax = window.MathJax;
 // var HOST = window.location.origin.replace(/^http/, 'ws')
-var url="ws://codingduel.herokuapp.com";
+var url="wss://codingduel.herokuapp.com";
 // var url="ws://localhost:4000";
 var connection;
 var counter = 1;

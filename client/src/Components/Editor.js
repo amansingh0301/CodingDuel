@@ -19,7 +19,7 @@ map["cpp"] = "c_cpp";
 map["pyton3"] = "python";
 
 // var HOST = window.location.origin.replace(/^http/, 'ws')
-var url="ws://codingduel.herokuapp.com";
+var url="wss://codingduel.herokuapp.com";
 // var url="ws://localhost:4000";
 
 function Editor() {
