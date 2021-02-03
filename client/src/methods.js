@@ -326,32 +326,32 @@ function goToVideoCall(callback, roomName) {
 }
 
 async function createAndSendOffer() {
-  try{
-    await peerConn.setLocalDescription(await peerConn.createOffer());
+  // try{
+  //   await peerConn.setLocalDescription(await peerConn.createOffer());
 
-    sendData({
-      type: "store_offer",
-      offer: peerConn.localDescription,
+  //   sendData({
+  //     type: "store_offer",
+  //     offer: peerConn.localDescription,
+  //   });
+  // }
+  // catch(err){
+  //   console.log(err);
+  //   console.log('cannot set local description or cannot create offer')
+  // }
+
+  peerConn
+    .createOffer()
+    .then((offer) => {
+      peerConn.setLocalDescription(offer);
+      sendData({
+        type: "store_offer",
+        offer: offer,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      alert("cnnot connect with opponent, refresh and try again.");
     });
-  }
-  catch(err){
-    console.log(err);
-    console.log('cannot set local description or cannot create offer')
-  }
-
-  // peerConn
-    // .createOffer()
-    // .then((offer) => {
-    //   peerConn.setLocalDescription(offer);
-    //   sendData({
-    //     type: "store_offer",
-    //     offer: offer,
-    //   });
-    // })
-
-    // .catch((error) => {
-    //   alert("cnnot connect with opponent, refresh and try again.");
-    // });
 }
 
 let peerConnj;
