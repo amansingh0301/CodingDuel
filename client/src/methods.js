@@ -53,16 +53,19 @@ function handleSignallingData(data) {
     switch (data.type) {
       case "answer":
         console.log('received answer.')
+        console.log("answer : ",data.answer)
         document.getElementById("call").style.display = "inline";
         try {
           peerConn
             .setRemoteDescription(data.answer)
             .then(() => {})
             .catch((err) => {
+              console.log(err)
               alert("refresh and try again.");
             });
             console.log('answer set')
         } catch (err) {
+          console.log(err)
           alert("refresh page and try again.");
         }
         break;
@@ -75,6 +78,7 @@ function handleSignallingData(data) {
             createAndSendAnswerj();
           })
           .catch((err) => {
+            console.log(err)
             alert("refresh page and try again.");
           });
           console.log('offer set')
@@ -110,6 +114,7 @@ function handleSignallingData(data) {
             console.log('ice candidate added')
           };
         }catch(err){
+          console.log(err)
           alert("someone try to join, refresh page and try again.");
         }
         break;
@@ -342,6 +347,7 @@ async function createAndSendOffer() {
   peerConn
     .createOffer()
     .then((offer) => {
+      console.log('offer : ',offer)
       peerConn.setLocalDescription(offer);
       sendData({
         type: "store_offer",
@@ -350,6 +356,7 @@ async function createAndSendOffer() {
     })
     .catch((error) => {
       console.log(error);
+      console.log(error)
       alert("cnnot connect with opponent, refresh and try again.");
     });
 }
