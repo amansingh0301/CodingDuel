@@ -190,6 +190,7 @@ function goToVideoCall(callback, roomName) {
         // }
 
         peerConn.onconnectionstatechange = (e) => {
+          console.log('state : ',peerConn.connectionState)
           if (
             peerConn.connectionState == "disconnected" ||
             peerConn.connectionState == "failed"
@@ -198,6 +199,7 @@ function goToVideoCall(callback, roomName) {
               localStream.getVideoTracks()[0].stop();
               localStream.getAudioTracks()[0].stop();
             }
+            console.log(peerConn.connectionState);
             if (peerConn) {
               peerConn.close();
             } else if (peerConnj) {
@@ -227,7 +229,7 @@ function goToVideoCall(callback, roomName) {
             isAudio = true;
             isVideo = true;
 
-            console.log(peerConnj.connectionState);
+            
             alert("Not available");
           }
         };
@@ -405,6 +407,7 @@ function joinVideoCall(callback, roomName) {
         });
 
         peerConnj.onconnectionstatechange = (e) => {
+          console.log('state : ',peerConnj.connectionState)
           if (
             peerConnj.connectionState == "failed" ||
             peerConnj.connectionState == "disconnected"
@@ -413,6 +416,7 @@ function joinVideoCall(callback, roomName) {
               localStream.getVideoTracks()[0].stop();
               localStream.getAudioTracks()[0].stop();
             }
+            console.log(peerConnj.connectionState)
             if (peerConn) {
               peerConn.close();
             } else if (peerConnj) {
@@ -441,7 +445,7 @@ function joinVideoCall(callback, roomName) {
             opponent = false;
             isAudio = true;
             isVideo = true;
-            console.log(peerConnj.connectionState)
+            
 
             alert("Not Available.");
           }
