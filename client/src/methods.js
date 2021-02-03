@@ -48,10 +48,11 @@ function start(url) {
 
 function handleSignallingData(data) {
   console.log(data)
-  try {
+  // try {
     // console.log(data);
     switch (data.type) {
       case "answer":
+        console.log('received answer.')
         document.getElementById("call").style.display = "inline";
         try {
           peerConn
@@ -66,6 +67,7 @@ function handleSignallingData(data) {
         }
         break;
       case "offer":
+        console.log('received offer.')
         document.getElementById("call").style.display = "inline";
         peerConnj
           .setRemoteDescription(data.offer)
@@ -83,6 +85,7 @@ function handleSignallingData(data) {
             peerConn.addIceCandidate(data.candidate)
             .catch(err => {
               if(er==true){
+                console.log('cannot add ice candidates')
                 return;
               }
               alert("someone try to join, refresh page and try again.")
@@ -94,6 +97,7 @@ function handleSignallingData(data) {
             peerConnj.addIceCandidate(data.candidate)
             .catch(err => {
               if(er==true){
+                console.log('cannot add ice candidates')
                 return;
               }
               alert("someone try to join, refresh page and try again.")
@@ -106,9 +110,9 @@ function handleSignallingData(data) {
         }
         break;
     }
-  } catch (err) {
-    alert("Please refresh page and try again.");
-  }
+  // } catch (err) {
+    // alert("Please refresh page and try again.");
+  // }
 }
 
 function sendData(data) {
@@ -145,17 +149,19 @@ function goToVideoCall(callback, roomName) {
                 "stun:stun.l.google.com:19302",
                 "stun:stun1.l.google.com:19302",
                 "stun:stun2.l.google.com:19302",
+                "stun:stun.cheapvoip.com:3478",
+                "stun:stun.commpeak.com:3478"
               ],
             },
             {
-              urls: ["turn:numb.viagenie.ca"],
-              username: "webrtc@live.com",
-              credential: "muazkh",
+              urls:"turn:106.215.229.64:3478",
+              credential: "test123",
+              username: "test"
             },
             {
-              urls:["turn:106.215.229.64:3478"],
-              username: "test",
-              credential: "test123"
+              urls: "turn:numb.viagenie.ca",
+              credential: "muazkh",
+              username: "webrtc@live.com"
             }
           ],
         };
@@ -164,6 +170,14 @@ function goToVideoCall(callback, roomName) {
         localStream.getTracks().forEach(function (track) {
           peerConn.addTrack(track, localStream);
         });
+
+        peerConn.onnegotiationneeded = async () =>{
+          try{
+            createOffer();
+          }catch(er){
+            alert('negotiation');
+          }
+        }
 
         peerConn.onconnectionstatechange = (e) => {
           if (
@@ -342,17 +356,20 @@ function joinVideoCall(callback, roomName) {
                 "stun:stun.l.google.com:19302",
                 "stun:stun1.l.google.com:19302",
                 "stun:stun2.l.google.com:19302",
+                "stun:stun.cheapvoip.com:3478",
+                "stun:stun.commpeak.com:3478"
               ],
             },
             {
-              urls: ["turn:numb.viagenie.ca"],
-              username: "webrtc@live.com",
-              credential: "muazkh",
+              urls:"turn:106.215.229.64:3478",
+              credential: "test123",
+              username: "test"
+              
             },
             {
-              urls:["turn:106.215.229.64:3478"],
-              username: "test",
-              credential: "test123"
+              urls: "turn:numb.viagenie.ca",
+              credential: "muazkh",
+              username: "webrtc@live.com"
             }
           ],
         };
