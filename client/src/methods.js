@@ -335,6 +335,7 @@ async function createAndSendOffer() {
     });
   }
   catch(err){
+    console.log(err);
     console.log('cannot set local description or cannot create offer')
   }
 
