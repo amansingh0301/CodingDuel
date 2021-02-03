@@ -173,7 +173,7 @@ function goToVideoCall(callback, roomName) {
 
         peerConn.onnegotiationneeded = async () =>{
           try{
-            createOffer();
+            createAndSendOffer();
           }catch(er){
             alert('negotiation');
           }
