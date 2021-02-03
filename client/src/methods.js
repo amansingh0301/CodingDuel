@@ -47,7 +47,7 @@ function start(url) {
 }
 
 function handleSignallingData(data) {
-  console.log(data)
+  // console.log(data)
   // try {
     // console.log(data);
     switch (data.type) {
@@ -58,12 +58,12 @@ function handleSignallingData(data) {
         try {
           peerConn
             .setRemoteDescription(data.answer)
-            .then(() => {})
+            .then(() => {console.log('answer set')})
             .catch((err) => {
               console.log(err)
               alert("refresh and try again.");
             });
-            console.log('answer set')
+            
         } catch (err) {
           console.log(err)
           alert("refresh page and try again.");
@@ -75,6 +75,7 @@ function handleSignallingData(data) {
         peerConnj
           .setRemoteDescription(data.offer)
           .then(() => {
+            console.log('offer set')
             createAndSendAnswerj();
           })
           .catch((err) => {
@@ -180,13 +181,13 @@ function goToVideoCall(callback, roomName) {
           peerConn.addTrack(track, localStream);
         });
 
-        peerConn.onnegotiationneeded = async () =>{
-          try{
-            createAndSendOffer();
-          }catch(er){
-            alert('negotiation');
-          }
-        }
+        // peerConn.onnegotiationneeded = async () =>{
+        //   try{
+        //     createAndSendOffer();
+        //   }catch(er){
+        //     alert('negotiation');
+        //   }
+        // }
 
         peerConn.onconnectionstatechange = (e) => {
           if (
