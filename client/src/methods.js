@@ -84,6 +84,8 @@ function handleSignallingData(data) {
           if (data.from == "receiver") {
             peerConn.addIceCandidate(data.candidate)
             .catch(err => {
+              console.log('while adding ice candidate')
+              console.log(err)
               if(er==true){
                 console.log('cannot add ice candidates')
                 return;
@@ -96,6 +98,8 @@ function handleSignallingData(data) {
           else {
             peerConnj.addIceCandidate(data.candidate)
             .catch(err => {
+              console.log('while adding ice candidate')
+              console.log(err)
               if(er==true){
                 console.log('cannot add ice candidates')
                 return;
@@ -321,20 +325,32 @@ function goToVideoCall(callback, roomName) {
   }
 }
 
-function createAndSendOffer() {
-  peerConn
-    .createOffer()
-    .then((offer) => {
-      peerConn.setLocalDescription(offer);
-      sendData({
-        type: "store_offer",
-        offer: offer,
-      });
-    })
+async function createAndSendOffer() {
+  try{
+    await peerConn.setLocalDescription(await peerConn.createOffer());
 
-    .catch((error) => {
-      alert("cnnot connect with opponent, refresh and try again.");
+    sendData({
+      type: "store_offer",
+      offer: peerConn.localDescription,
     });
+  }
+  catch(err){
+    console.log('cannot set local description or cannot create offer')
+  }
+
+  // peerConn
+    // .createOffer()
+    // .then((offer) => {
+    //   peerConn.setLocalDescription(offer);
+    //   sendData({
+    //     type: "store_offer",
+    //     offer: offer,
+    //   });
+    // })
+
+    // .catch((error) => {
+    //   alert("cnnot connect with opponent, refresh and try again.");
+    // });
 }
 
 let peerConnj;
