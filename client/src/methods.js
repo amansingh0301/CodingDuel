@@ -49,7 +49,7 @@ function start(url) {
 function handleSignallingData(data) {
   console.log(data)
   try {
-    console.log(data);
+    // console.log(data);
     switch (data.type) {
       case "answer":
         document.getElementById("call").style.display = "inline";
@@ -60,6 +60,7 @@ function handleSignallingData(data) {
             .catch((err) => {
               alert("refresh and try again.");
             });
+            console.log('answer set')
         } catch (err) {
           alert("refresh page and try again.");
         }
@@ -74,6 +75,7 @@ function handleSignallingData(data) {
           .catch((err) => {
             alert("refresh page and try again.");
           });
+          console.log('offer set')
         break;
       case "candidate":
         try{
@@ -86,6 +88,7 @@ function handleSignallingData(data) {
               alert("someone try to join, refresh page and try again.")
               er=true;
             })
+            console.log('ice candidate added')
           }
           else {
             peerConnj.addIceCandidate(data.candidate)
@@ -96,6 +99,7 @@ function handleSignallingData(data) {
               alert("someone try to join, refresh page and try again.")
               er=true;
             })
+            console.log('ice candidate added')
           };
         }catch(err){
           alert("someone try to join, refresh page and try again.");
@@ -148,6 +152,11 @@ function goToVideoCall(callback, roomName) {
               username: "webrtc@live.com",
               credential: "muazkh",
             },
+            {
+              urls:["turn:106.215.229.64:3478"],
+              username: "test",
+              credential: "test123"
+            }
           ],
         };
 
@@ -193,6 +202,8 @@ function goToVideoCall(callback, roomName) {
             opponent = false;
             isAudio = true;
             isVideo = true;
+
+            console.log(peerConnj.connectionState);
             alert("Not available");
           }
         };
@@ -338,6 +349,11 @@ function joinVideoCall(callback, roomName) {
               username: "webrtc@live.com",
               credential: "muazkh",
             },
+            {
+              urls:["turn:106.215.229.64:3478"],
+              username: "test",
+              credential: "test123"
+            }
           ],
         };
 
@@ -383,6 +399,7 @@ function joinVideoCall(callback, roomName) {
             opponent = false;
             isAudio = true;
             isVideo = true;
+            console.log(peerConnj.connectionState)
 
             alert("Not Available.");
           }
