@@ -58,7 +58,7 @@ function handleSignallingData(data) {
         try {
           peerConn
             .setRemoteDescription(data.answer)
-            .then(() => {console.log('answer set')})
+            .then(() => {console.log('remote description set')})
             .catch((err) => {
               console.log(err)
               alert("refresh and try again.");
@@ -75,7 +75,7 @@ function handleSignallingData(data) {
         peerConnj
           .setRemoteDescription(data.offer)
           .then(() => {
-            console.log('offer set')
+            console.log('remote description set')
             createAndSendAnswerj();
           })
           .catch((err) => {
@@ -353,7 +353,14 @@ async function createAndSendOffer() {
     .createOffer()
     .then((offer) => {
       console.log('offer : ',offer)
-      peerConn.setLocalDescription(offer);
+      peerConn.setLocalDescription(offer)
+      .then(() => {
+        console.log('local description set')
+      })
+      .catch(err =>{
+        console.log('local description is not set')
+        console.log(err);
+      });
       sendData({
         type: "store_offer",
         offer: offer,
@@ -542,7 +549,14 @@ function joinVideoCall(callback, roomName) {
 function createAndSendAnswerj() {
   peerConnj.createAnswer(
     (answer) => {
-      peerConnj.setLocalDescription(answer);
+      peerConnj.setLocalDescription(answer)
+      .then(()=>{
+        console.log('local description set')
+      })
+      .catch(err => {
+        console.log('local description not set')
+        console.log(err);
+      });
       sendDataj({
         type: "send_answer",
         answer: answer,
