@@ -47,7 +47,7 @@ function start(url) {
 }
 
 function handleSignallingData(data) {
-  // console.log(data)
+  console.log(data)
   // try {
     // console.log(data);
     switch (data.type) {
@@ -125,12 +125,12 @@ function handleSignallingData(data) {
         break;
     }
   // } catch (err) {
-    // alert("Please refresh page and try again.");
+    // alert("   refresh page and try again.");
   // }
 }
 
 function sendData(data) {
-  console.log('sending..')
+  console.log(`sending.. ${data.type}`)
   data.username = username;
   data.from = "sender";
   webSocket.send(JSON.stringify(data));
@@ -160,11 +160,11 @@ function goToVideoCall(callback, roomName) {
           iceServers: [
             {
               urls: [
+                "stun:stun.cheapvoip.com:3478",
+                "stun:stun.commpeak.com:3478",
                 "stun:stun.l.google.com:19302",
                 "stun:stun1.l.google.com:19302",
                 "stun:stun2.l.google.com:19302",
-                "stun:stun.cheapvoip.com:3478",
-                "stun:stun.commpeak.com:3478"
               ],
             },
             {
@@ -391,11 +391,11 @@ function joinVideoCall(callback, roomName) {
           iceServers: [
             {
               urls: [
+                "stun:stun.cheapvoip.com:3478",
+                "stun:stun.commpeak.com:3478",
                 "stun:stun.l.google.com:19302",
                 "stun:stun1.l.google.com:19302",
                 "stun:stun2.l.google.com:19302",
-                "stun:stun.cheapvoip.com:3478",
-                "stun:stun.commpeak.com:3478"
               ],
             },
             {
@@ -503,14 +503,14 @@ function joinVideoCall(callback, roomName) {
           alert("cannot add video, proceed or refresh page and try again.");
         }
 
-        peerConnj.onicecandidate = (e) => {
-          if (e.candidate == null) return;
+        // peerConnj.onicecandidate = (e) => {
+        //   if (e.candidate == null) return;
 
-          sendDataj({
-            type: "send_candidate",
-            candidate: e.candidate,
-          });
-        };
+        //   sendDataj({
+        //     type: "send_candidate",
+        //     candidate: e.candidate,
+        //   });
+        // };
 
         sendDataj({
           type: "join_call",
@@ -554,16 +554,29 @@ function createAndSendAnswerj() {
       peerConnj.setLocalDescription(answer)
       .then(()=>{
         console.log('local description set')
+        console.log('sending answer..')
+        sendDataj({
+          type: "send_answer",
+          answer: answer,
+        });
+        peerConnj.onicecandidate = (e) => {
+          if (e.candidate == null) return;
+
+          sendDataj({
+            type: "send_candidate",
+            candidate: e.candidate,
+          });
+        };
       })
       .catch(err => {
         console.log('local description not set')
         console.log(err);
       });
-      console.log('sending answer..')
-      sendDataj({
-        type: "send_answer",
-        answer: answer,
-      });
+      // console.log('sending answer..')
+      // sendDataj({
+      //   type: "send_answer",
+      //   answer: answer,
+      // });
     },
     (error) => {
       alert("cannot connect with opponent, Refresh page and try again.");
@@ -573,6 +586,7 @@ function createAndSendAnswerj() {
 
 function sendDataj(data) {
   try {
+    console.log(`sending.. ${data.type}`)
     data.username = username;
     data.from = "receiver";
     webSocket.send(JSON.stringify(data));
