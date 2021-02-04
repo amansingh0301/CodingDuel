@@ -185,13 +185,13 @@ function goToVideoCall(callback, roomName) {
           peerConn.addTrack(track, localStream);
         });
 
-        // peerConn.onnegotiationneeded = async () =>{
-        //   try{
-        //     createAndSendOffer();
-        //   }catch(er){
-        //     alert('negotiation');
-        //   }
-        // }
+        peerConn.onnegotiationneeded = async () =>{
+          try{
+            createAndSendOffer();
+          }catch(er){
+            alert('negotiation');
+          }
+        }
 
         peerConn.onconnectionstatechange = (e) => {
           console.log('state : ',peerConn.connectionState)
@@ -358,19 +358,18 @@ async function createAndSendOffer() {
       peerConn.setLocalDescription(offer)
       .then(() => {
         console.log('local description set')
+        sendData({
+          type: "store_offer",
+          offer: offer,
+        });
       })
       .catch(err =>{
         console.log('local description is not set')
         console.log(err);
       });
-      sendData({
-        type: "store_offer",
-        offer: offer,
-      });
     })
     .catch((error) => {
       console.log(error);
-      console.log(error)
       alert("cnnot connect with opponent, refresh and try again.");
     });
 }

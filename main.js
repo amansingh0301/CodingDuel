@@ -127,11 +127,18 @@ app.post("/register", async (req, res) => {
 app.post("/submit", cors(), async (req, res, next) => {
   var parsedRequest = JSON.parse(req.body);
   console.log("language received by server : ", parsedRequest.language);
-  const data = await submitToCf(
-    parsedRequest.userCode,
-    parsedRequest.problemCode,
-    parsedRequest.language
-  );
+  try{
+    const data = await submitToCf(
+      parsedRequest.userCode,
+      parsedRequest.problemCode,
+      parsedRequest.language
+    );
+  }catch(err){
+    console.log(err)
+    res.send(JSON.stringify({
+      virdict:"cannot submit, server error"
+    }))
+  }
 
   // sending activities
   const activity = {
