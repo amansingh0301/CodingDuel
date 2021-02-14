@@ -163,8 +163,8 @@ function Contest(props) {
 
       if (diff <= 0) {
         clearInterval(timer);
-        const yourPoints= parseInt(document.getElementById('yourPoints').innerText);
-        const opponentPoints = parseInt(document.getElementById('opponentPoints').innerText);
+        const yourPoints= parseInt(document.getElementById('yourPoints').innerText.split("|")[0].trim());
+        const opponentPoints = parseInt(document.getElementById('opponentPoints').innerText.split("|")[1].trim());
         console.log(yourPoints,opponentPoints);
         var winner;
         if(yourPoints>opponentPoints){
