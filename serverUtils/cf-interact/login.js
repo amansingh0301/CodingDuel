@@ -54,9 +54,10 @@ async function submit(userCode, problemCode, language) {
 
   const browser = await puppeteer.launch({
     //ignoreDefaultArgs: true,
-    args: ["--disable-features=ImprovedCookieControls"],
+    args: ["--disable-features=ImprovedCookieControls","--no-sandbox"],
     executablePath:
-      "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+    "google-chrome",
+      // "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
     headless: true,
   });
 
