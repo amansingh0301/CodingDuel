@@ -11,6 +11,7 @@ import { makeStyles } from "@material-ui/styles";
 import methods from "../methods";
 
 const MathJax = window.MathJax;
+window.$contest=true;
 // var HOST = window.location.origin.replace(/^http/, 'ws')
 var url="wss://codingduel.herokuapp.com";
 // var url="ws://localhost:4000";
@@ -97,14 +98,16 @@ function Contest(props) {
         const elem=document.getElementById('textChat');
         elem.scrollTop = elem.scrollHeight;
       } else if (fromServer.type == "got_score") {
-        console.log('got score',fromServer.name,fromServer.score);
-        if (window.$name != fromServer.name) {
-          const opponentPoints = fromServer.score;
-          try {
-            document.getElementById("opponentPoints").innerText =
-              "| " + opponentPoints;
-          } catch (err) {
-            alert("cannot set points");
+        if(window.$contest){
+          console.log('got score',fromServer.name,fromServer.score);
+          if (window.$name != fromServer.name) {
+            const opponentPoints = fromServer.score;
+            try {
+              document.getElementById("opponentPoints").innerText =
+                "| " + opponentPoints;
+            } catch (err) {
+              alert("cannot set points");
+            }
           }
         }
       } else {
@@ -163,6 +166,7 @@ function Contest(props) {
 
       if (diff <= 0) {
         clearInterval(timer);
+        window.$contest=false;
         const yourPoints= parseInt(document.getElementById('yourPoints').innerText.split("|")[0].trim());
         const opponentPoints = parseInt(document.getElementById('opponentPoints').innerText.split("|")[1].trim());
         console.log(yourPoints,opponentPoints);

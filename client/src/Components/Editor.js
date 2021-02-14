@@ -101,16 +101,18 @@ function Editor() {
     );
     verdict = JSON.parse(verdict);
     if (verdict.verdict == "OK") {
-      yourPoints += verdict.points;
-      document.getElementById("yourPoints").innerText = yourPoints + " |";
-      connection.send(
-        JSON.stringify({
-          type: "store_score",
-          roomName: window.$roomName,
-          name: window.$name,
-          score: yourPoints,
-        })
-      );
+      if(window.$contest){
+        yourPoints += verdict.points;
+        document.getElementById("yourPoints").innerText = yourPoints + " |";
+        connection.send(
+          JSON.stringify({
+            type: "store_score",
+            roomName: window.$roomName,
+            name: window.$name,
+            score: yourPoints,
+          })
+        );
+      }
     }
     stdoutRef.current.value = verdict.verdict;
   }
