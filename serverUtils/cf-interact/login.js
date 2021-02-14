@@ -20,11 +20,11 @@ async function waitForDuration(duration) {
 async function login() {
   const browser = await puppeteer.launch({
     args: ["--disable-features=ImprovedCookieControls","--no-sandbox"],
-    executablePath:
-      "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+    executablePath: "google-chrome",
+      // "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
     headless: true,
   });
-  
+
 
   const page = await browser.newPage();
 
