@@ -160,6 +160,7 @@ function goToVideoCall(callback, roomName) {
           iceServers: [
             {
               urls: [
+                "stun:stun.stunprotocol.org",
                 "stun:stun.cheapvoip.com:3478",
                 "stun:stun.commpeak.com:3478",
                 "stun:stun.l.google.com:19302",
@@ -168,14 +169,14 @@ function goToVideoCall(callback, roomName) {
               ],
             },
             {
-              urls:"turn:106.215.229.64:3478",
-              credential: "test123",
-              username: "test"
-            },
-            {
               urls: "turn:numb.viagenie.ca",
               credential: "muazkh",
               username: "webrtc@live.com"
+            },
+            {
+              urls:"turn:106.215.229.64:3478",
+              credential: "test123",
+              username: "test"
             }
           ],
         };
@@ -390,6 +391,7 @@ function joinVideoCall(callback, roomName) {
           iceServers: [
             {
               urls: [
+                "stun:stun.stunprotocol.org",
                 "stun:stun.cheapvoip.com:3478",
                 "stun:stun.commpeak.com:3478",
                 "stun:stun.l.google.com:19302",
@@ -398,15 +400,15 @@ function joinVideoCall(callback, roomName) {
               ],
             },
             {
+              urls: "turn:numb.viagenie.ca",
+              credential: "muazkh",
+              username: "webrtc@live.com"
+            },
+            {
               urls:"turn:106.215.229.64:3478",
               credential: "test123",
               username: "test"
               
-            },
-            {
-              urls: "turn:numb.viagenie.ca",
-              credential: "muazkh",
-              username: "webrtc@live.com"
             }
           ],
         };
