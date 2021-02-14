@@ -78,6 +78,7 @@ function StartContest() {
     setIsAdmin(true);
     window.$roomName = roomName;
     try {
+      console.log('username : ',window.$name)
       methods.goToVideoCall((e) => {
         window.$roomName = roomName;
         if (e == true) {
@@ -104,6 +105,7 @@ function StartContest() {
   function join() {
     window.$roomName = roomName;
     try {
+      console.log('username : ',window.$name);
       methods.joinVideoCall((e) => {
         if (e == true) {
           setRefferrer(true);
