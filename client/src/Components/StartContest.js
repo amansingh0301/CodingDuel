@@ -95,6 +95,7 @@ function StartContest() {
       );
       handleData(data);
     } catch (err) {
+      console.log(err);
       alert("Please refresh and try again.");
     }
   }
@@ -119,6 +120,7 @@ function StartContest() {
         })
       );
     } catch (err) {
+      console.log(err);
       alert("Please refresh and try again");
     }
   }

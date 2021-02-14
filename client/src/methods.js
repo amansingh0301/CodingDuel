@@ -190,6 +190,7 @@ function goToVideoCall(callback, roomName) {
           try{
             createAndSendOffer();
           }catch(er){
+            console.log(er);
             alert('negotiation');
           }
         }
@@ -268,6 +269,7 @@ function goToVideoCall(callback, roomName) {
             }
           };
         } catch (err) {
+          console.log(err);
           alert("Not connected to opponent.");
         }
 
@@ -290,6 +292,7 @@ function goToVideoCall(callback, roomName) {
             }
           };
         } catch (err) {
+          console.log(err);
           alert("cannot add video, refresh and try again.");
         }
         try {
@@ -301,12 +304,14 @@ function goToVideoCall(callback, roomName) {
             });
           };
         } catch (err) {
+          console.log(err);
           alert("Refresh and try again.");
         }
 
         createAndSendOffer();
       },
       (error) => {
+        console.log(error);
         alert("Cannot get video");
       }
     );
@@ -334,6 +339,7 @@ function goToVideoCall(callback, roomName) {
     };
     readyButton.addEventListener("click", readyFunction);
   } catch (err) {
+    console.log(err)
     alert("Not connected to Opponent.");
   }
 }
@@ -501,6 +507,7 @@ function joinVideoCall(callback, roomName) {
             remoteVideo.autoplay = true;
           };
         } catch (err) {
+          console.log(err)
           alert("cannot add video, proceed or refresh page and try again.");
         }
 
@@ -518,6 +525,7 @@ function joinVideoCall(callback, roomName) {
         });
       },
       (error) => {
+        console.log(error)
         alert("cannot get video.");
       }
     );
@@ -545,6 +553,7 @@ function joinVideoCall(callback, roomName) {
     };
     readyButton.addEventListener("click", readyFunction);
   } catch (err) {
+    console.log(err)
     alert("Not connected with opponent");
   }
 }
@@ -580,6 +589,7 @@ function createAndSendAnswerj() {
       // });
     },
     (error) => {
+      console.log(error)
       alert("cannot connect with opponent, Refresh page and try again.");
     }
   );
@@ -592,6 +602,7 @@ function sendDataj(data) {
     data.from = "receiver";
     webSocket.send(JSON.stringify(data));
   } catch (err) {
+    console.log(err)
     alert("try again");
   }
 }
