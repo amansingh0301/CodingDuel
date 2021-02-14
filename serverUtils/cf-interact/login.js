@@ -24,6 +24,7 @@ async function login() {
       "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
     headless: true,
   });
+  
 
   const page = await browser.newPage();
 
