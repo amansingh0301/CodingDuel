@@ -94,7 +94,10 @@ function Contest(props) {
           ...oldActivity,
           `${fromServer.name} : ${fromServer.msg}`,
         ]);
+        const elem=document.getElementById('textChat');
+        elem.scrollTop = elem.scrollHeight;
       } else if (fromServer.type == "got_score") {
+        console.log('got score',fromServer.name,fromServer.score);
         if (window.$name != fromServer.name) {
           const opponentPoints = fromServer.score;
           try {
@@ -177,6 +180,8 @@ function Contest(props) {
         msg: document.getElementById("message").value,
       })
     );
+    const elem=document.getElementById('textChat');
+    elem.scrollTop = elem.scrollHeight;
   }
 
   const logout = () => {

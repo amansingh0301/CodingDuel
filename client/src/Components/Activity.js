@@ -32,7 +32,7 @@ function Activity(props) {
 
   return (
     <div>
-      <List className={classes.scrollMenu}>
+      <List className={classes.scrollMenu} id='textChat'>
         <ListItem alignItems="flex-start">
           <ListItemText primary="sent a message last " />
         </ListItem>

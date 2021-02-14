@@ -362,7 +362,7 @@ webSocket.on("request", async (req) => {
         roomIndex = await getRoomIndex(data.roomName);
         console.log("roomIndex : ", roomIndex);
         if (roomIndex !== undefined) {
-          console.log("points storing is : ", data.store);
+          console.log("points storing is : ", data.score);
           if (rooms[roomIndex].user1 == data.name) {
             rooms[roomIndex].user1Score = data.score;
             console.log("score saved1!");
