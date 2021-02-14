@@ -163,7 +163,21 @@ function Contest(props) {
 
       if (diff <= 0) {
         clearInterval(timer);
-        alert("Contest Ends");
+        const yourPoints= parseInt(document.getElementById('yourPoints').innerText);
+        const opponentPoints = parseInt(document.getElementById('opponentPoints').innerText);
+        console.log(yourPoints,opponentPoints);
+        var winner;
+        if(yourPoints>opponentPoints){
+          winner='won';
+        }else if(yourPoints === opponentPoints){
+          winner='draw';
+        }else{
+          winner='lose';
+        }
+        if(winner !== 'draw')
+          alert(`You ${winner}`);
+        else
+          alert('Draw');
         return;
       }
     }
