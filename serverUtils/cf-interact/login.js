@@ -103,7 +103,14 @@ async function submit(userCode, problemCode, language) {
 
   await page.click("input[type=submit]");
   waitForDuration(2000);
-  const error = await page.select('#for__source');
+  // await page.evaluate(() => {
+  //   let el = document.getElementsByClassName("for__source");
+  //   if(el){
+  //     sameCode=true;
+  //     return el.innerText;
+  //   }
+  // })
+  const error = await page.select('for__source');
   if(error !== null && error !== undefined){
     sameCode=true;
     return;
