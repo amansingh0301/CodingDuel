@@ -5,6 +5,7 @@ const fs = require("fs");
 var handle = process.env.handle;
 var password = process.env.password;
 const verdict = require("./verdict");
+var sameCode = false;
 
 // handle the situation when the code entered is the same as some old submission,
 // the page won't redirect to submitted solutions page
@@ -84,13 +85,13 @@ async function submit(userCode, problemCode, language) {
   await page.screenshot({ path: "afterProblemCode.png" });
   switch (language) {
     case "cpp":
-      page.select("select[name=programTypeId]", "54");
+      await page.select("select[name=programTypeId]", "54");
       break;
     case "java":
-      page.select("select[name=programTypeId]", "36");
+      await page.select("select[name=programTypeId]", "36");
       break;
     case "python3":
-      page.select("select[name=programTypeId]", "31");
+      await page.select("select[name=programTypeId]", "31");
       break;
   }
 
@@ -102,6 +103,11 @@ async function submit(userCode, problemCode, language) {
 
   await page.click("input[type=submit]");
   waitForDuration(2000);
+  const error = await page.select('#for__source');
+  if(error !== null && error !== undefined){
+    sameCode=true;
+    return;
+  }
   await page.screenshot({ path: "afterClickingSubmit.png" });
 
   waitForDuration(3000);
@@ -113,6 +119,9 @@ async function submitToCF(userCode, problemCode, language) {
   await login();
   console.log("language received by submitToCF api : ", language);
   await submit(userCode, problemCode, language);
+  if(sameCode===true){
+    return "You have submitted exactly the same code before";
+  }
   const submissionVerdict = await verdict();
   console.log("Verdict came : ", submissionVerdict);
   return submissionVerdict;
