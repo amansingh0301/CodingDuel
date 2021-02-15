@@ -100,6 +100,7 @@ function Editor() {
       window.$name
     );
     verdict = JSON.parse(verdict);
+    console.log(verdict)
     if (verdict.verdict == "OK") {
       if(window.$contest){
         yourPoints += verdict.points;

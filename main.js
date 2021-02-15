@@ -160,7 +160,7 @@ app.post("/submit", cors(), async (req, res, next) => {
   } else {
     res.send(
       JSON.stringify({
-        virdict: data,
+        verdict: data,
       })
     );
   }
